@@ -132,13 +132,13 @@ function M.build(config, c)
     Keyword = style({ fg = c.keyword }, styles.keywords),
     Exception = style({ fg = c.keyword }, styles.keywords),
 
-    -- Directives take the plain foreground, not the keyword goldenrod, which
-    -- is reserved for keywords and types. `#define` and `#if` sit at the same
-    -- level as ordinary text.
-    PreProc = { fg = c.fg },
-    Include = { fg = c.fg },
-    Define = { fg = c.fg },
-    PreCondit = { fg = c.fg },
+    -- Directives sit a step brighter than body text, and well clear of the
+    -- keyword goldenrod: `#define` and `#if` mark structure around the code
+    -- rather than being part of it.
+    PreProc = { fg = c.fg_bright },
+    Include = { fg = c.fg_bright },
+    Define = { fg = c.fg_bright },
+    PreCondit = { fg = c.fg_bright },
     Macro = { fg = c.keyword },
 
     Type = style({ fg = type_fg }, styles.types),
@@ -292,13 +292,13 @@ function M.build(config, c)
     ["@keyword.exception"] = style({ fg = c.keyword }, styles.keywords),
     ["@keyword.conditional"] = style({ fg = c.keyword }, styles.keywords),
     ["@keyword.conditional.ternary"] = { fg = c.fg },
-    ["@keyword.directive"] = { fg = c.fg },
-    ["@keyword.directive.define"] = { fg = c.fg },
+    ["@keyword.directive"] = { fg = c.fg_bright },
+    ["@keyword.directive.define"] = { fg = c.fg_bright },
     -- Older queries (and several parsers) still capture directives as
     -- @preproc rather than @keyword.directive.
-    ["@preproc"] = { fg = c.fg },
-    ["@define"] = { fg = c.fg },
-    ["@include"] = { fg = c.fg },
+    ["@preproc"] = { fg = c.fg_bright },
+    ["@define"] = { fg = c.fg_bright },
+    ["@include"] = { fg = c.fg_bright },
 
     ["@punctuation.delimiter"] = { fg = c.fg_dim },
     ["@punctuation.bracket"] = { fg = c.fg_dim },

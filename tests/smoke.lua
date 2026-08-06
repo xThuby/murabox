@@ -58,15 +58,17 @@ check("@number matches @string", hl("@number").fg == hl("@string").fg, hex(hl("@
 check("String is olive drab", hl("String").fg == 0x6B8E23, hex(hl("String").fg))
 check("Function is flat fg", hl("Function").fg == 0xA08563, hex(hl("Function").fg))
 
--- Preprocessor directives sit at plain-text level, not with the keywords.
-check("PreProc matches Normal", hl("PreProc").fg == hl("Normal").fg, hex(hl("PreProc").fg))
-check("PreCondit matches Normal", hl("PreCondit").fg == hl("Normal").fg, hex(hl("PreCondit").fg))
-check("@preproc matches Normal", hl("@preproc").fg == hl("Normal").fg, hex(hl("@preproc").fg))
+-- Preprocessor directives sit a step brighter than body text, and are never
+-- the keyword goldenrod.
+check("PreProc is fg_bright", hl("PreProc").fg == 0xCDAA7D, hex(hl("PreProc").fg))
+check("PreCondit is fg_bright", hl("PreCondit").fg == 0xCDAA7D, hex(hl("PreCondit").fg))
+check("@preproc is fg_bright", hl("@preproc").fg == 0xCDAA7D, hex(hl("@preproc").fg))
 check(
-  "@keyword.directive matches Normal",
-  hl("@keyword.directive").fg == hl("Normal").fg,
+  "@keyword.directive is fg_bright",
+  hl("@keyword.directive").fg == 0xCDAA7D,
   hex(hl("@keyword.directive").fg)
 )
+check("PreProc is brighter than Normal", hl("PreProc").fg ~= hl("Normal").fg, "same as Normal")
 check("PreProc is not the keyword colour", hl("PreProc").fg ~= hl("Keyword").fg, "same as Keyword")
 
 -- Line numbers read as ordinary text.
