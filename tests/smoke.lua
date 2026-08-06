@@ -58,6 +58,20 @@ check("@number matches @string", hl("@number").fg == hl("@string").fg, hex(hl("@
 check("String is olive drab", hl("String").fg == 0x6B8E23, hex(hl("String").fg))
 check("Function is flat fg", hl("Function").fg == 0xA08563, hex(hl("Function").fg))
 
+-- Preprocessor directives sit at plain-text level, not with the keywords.
+check("PreProc matches Normal", hl("PreProc").fg == hl("Normal").fg, hex(hl("PreProc").fg))
+check("PreCondit matches Normal", hl("PreCondit").fg == hl("Normal").fg, hex(hl("PreCondit").fg))
+check("@preproc matches Normal", hl("@preproc").fg == hl("Normal").fg, hex(hl("@preproc").fg))
+check(
+  "@keyword.directive matches Normal",
+  hl("@keyword.directive").fg == hl("Normal").fg,
+  hex(hl("@keyword.directive").fg)
+)
+check("PreProc is not the keyword colour", hl("PreProc").fg ~= hl("Keyword").fg, "same as Keyword")
+
+-- Line numbers read as ordinary text.
+check("LineNr matches Normal", hl("LineNr").fg == hl("Normal").fg, hex(hl("LineNr").fg))
+
 -- Mode-dependent cursor.
 check("cursor normal is green", hl("MuraboxCursorNormal").bg == 0x40FF40, hex(hl("MuraboxCursorNormal").bg))
 check("cursor insert is red", hl("MuraboxCursorInsert").bg == 0xFF4040, hex(hl("MuraboxCursorInsert").bg))

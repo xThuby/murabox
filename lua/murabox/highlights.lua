@@ -47,7 +47,7 @@ function M.build(config, c)
     CursorColumn = { bg = c.bg_highlight },
     ColorColumn = { bg = c.bg_highlight },
 
-    LineNr = { fg = c.fg_dark },
+    LineNr = { fg = c.fg },
     CursorLineNr = { fg = c.keyword },
     LineNrAbove = { link = "LineNr" },
     LineNrBelow = { link = "LineNr" },
@@ -132,11 +132,14 @@ function M.build(config, c)
     Keyword = style({ fg = c.keyword }, styles.keywords),
     Exception = style({ fg = c.keyword }, styles.keywords),
 
-    PreProc = { fg = c.keyword },
-    Include = { fg = c.keyword },
-    Define = { fg = c.keyword },
+    -- Directives take the plain foreground, not the keyword goldenrod, which
+    -- is reserved for keywords and types. `#define` and `#if` sit at the same
+    -- level as ordinary text.
+    PreProc = { fg = c.fg },
+    Include = { fg = c.fg },
+    Define = { fg = c.fg },
+    PreCondit = { fg = c.fg },
     Macro = { fg = c.keyword },
-    PreCondit = { fg = c.keyword },
 
     Type = style({ fg = type_fg }, styles.types),
     StorageClass = style({ fg = c.keyword }, styles.keywords),
@@ -289,13 +292,13 @@ function M.build(config, c)
     ["@keyword.exception"] = style({ fg = c.keyword }, styles.keywords),
     ["@keyword.conditional"] = style({ fg = c.keyword }, styles.keywords),
     ["@keyword.conditional.ternary"] = { fg = c.fg },
-    ["@keyword.directive"] = { fg = c.keyword },
-    ["@keyword.directive.define"] = { fg = c.keyword },
+    ["@keyword.directive"] = { fg = c.fg },
+    ["@keyword.directive.define"] = { fg = c.fg },
     -- Older queries (and several parsers) still capture directives as
     -- @preproc rather than @keyword.directive.
-    ["@preproc"] = { fg = c.keyword },
-    ["@define"] = { fg = c.keyword },
-    ["@include"] = { fg = c.keyword },
+    ["@preproc"] = { fg = c.fg },
+    ["@define"] = { fg = c.fg },
+    ["@include"] = { fg = c.fg },
 
     ["@punctuation.delimiter"] = { fg = c.fg_dim },
     ["@punctuation.bracket"] = { fg = c.fg_dim },
