@@ -32,7 +32,7 @@ M.defaults = {
   --- colourscheme is loaded. Set false to keep full control of the option.
   mode_cursor = true,
 
-  --- Highlight TODO / NOTE / IMPORTANT / STUDY style keywords in comments.
+  --- Colour TODO / NOTE / IMPORTANT / STUDY style keywords in comments.
   comment_keywords = true,
 
   --- Extend or replace palette colours. Either a table merged over the

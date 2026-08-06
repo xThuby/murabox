@@ -160,7 +160,7 @@ function M.build(config, c)
     Italic = { italic = true },
     Ignore = { fg = c.grey },
     Error = { fg = c.red },
-    Todo = { fg = c.bg, bg = c.keyword, bold = true },
+    Todo = { fg = c.keyword, bold = true },
 
     -- ==================================================================
     -- Diagnostics
@@ -525,10 +525,12 @@ function M.build(config, c)
 
   -- TODO / NOTE / IMPORTANT style keywords.
   if config.comment_keywords then
-    hl.MuraboxTodo = { fg = c.bg, bg = c.keyword, bold = true }
-    hl.MuraboxNote = { fg = c.bg, bg = c.green, bold = true }
-    hl.MuraboxImportant = { fg = c.bg, bg = c.red, bold = true }
-    hl.MuraboxStudy = { fg = c.bg, bg = c.cyan, bold = true }
+    -- Colour the letters themselves and leave the background alone, so the
+    -- keyword stands out without punching a block into the line.
+    hl.MuraboxTodo = { fg = c.keyword, bold = true }
+    hl.MuraboxNote = { fg = c.green, bold = true }
+    hl.MuraboxImportant = { fg = c.red, bold = true }
+    hl.MuraboxStudy = { fg = c.cyan, bold = true }
 
     -- todo-comments.nvim
     hl.TodoBgTODO = { fg = c.bg, bg = c.keyword, bold = true }

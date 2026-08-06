@@ -98,7 +98,12 @@ check(
 )
 check("TelescopeSelection set", hl("TelescopeSelection").bg ~= nil, "missing")
 check("terminal_color_3 set", vim.g.terminal_color_3 == "#CD950C", tostring(vim.g.terminal_color_3))
-check("MuraboxTodo defined", hl("MuraboxTodo").bg == 0xCD950C, hex(hl("MuraboxTodo").bg))
+-- Comment keywords colour the letters, not the line behind them.
+check("MuraboxTodo is goldenrod text", hl("MuraboxTodo").fg == 0xCD950C, hex(hl("MuraboxTodo").fg))
+check("MuraboxTodo has no background", hl("MuraboxTodo").bg == nil, hex(hl("MuraboxTodo").bg))
+check("MuraboxNote has no background", hl("MuraboxNote").bg == nil, hex(hl("MuraboxNote").bg))
+check("MuraboxImportant is full red", hl("MuraboxImportant").fg == 0xFF4040, hex(hl("MuraboxImportant").fg))
+check("Todo has no background", hl("Todo").bg == nil, hex(hl("Todo").bg))
 
 -- No highlight group should carry a nil-ish or malformed spec.
 local groups = require("murabox.highlights").build(

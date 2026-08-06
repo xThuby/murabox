@@ -103,8 +103,7 @@ require("murabox").setup({
   -- Colour the cursor by mode: green normal, red insert, blue visual.
   mode_cursor = true,
 
-  -- Highlight TODO / NOTE / IMPORTANT / STUDY with a solid block. See the
-  -- note below.
+  -- Colour TODO / NOTE / IMPORTANT / STUDY in comments. See the note below.
   comment_keywords = true,
 
   -- Change palette colours. Table (merged) or function (mutates in place).
@@ -162,8 +161,9 @@ require("lualine").setup({ options = { theme = "murabox" } })
 
 ## Comment keywords
 
-`comment_keywords` highlights `TODO`, `NOTE`, `IMPORTANT` and `STUDY` with a
-solid background block so they can't be scrolled past. It uses window-local
+`comment_keywords` colours `TODO`, `NOTE`, `IMPORTANT` and `STUDY` in bold so
+they can't be scrolled past — the letters only, with the background left
+alone. It uses window-local
 matches rather than syntax rules, so it works in Treesitter-highlighted buffers
 too — the tradeoff is that the words are matched anywhere in the buffer, not
 only inside comments. Set `comment_keywords = false` to turn it off, or use
