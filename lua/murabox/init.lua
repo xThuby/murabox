@@ -1,4 +1,4 @@
---- Murabox: a Neovim colourscheme after Casey Muratori's Handmade Hero setup.
+--- Murabox: a Neovim colourscheme based on Handmade Hero.
 
 local config = require("murabox.config")
 local palette = require("murabox.palette")

@@ -1,7 +1,7 @@
 --- Mode-dependent cursor colour.
 ---
---- Green in normal mode (the colour from the original config), red in insert,
---- blue in visual. Neovim drives this through 'guicursor', which names a
+--- Green in normal mode, red in insert, blue in visual. Neovim drives this
+--- through 'guicursor', which names a
 --- highlight group per mode, so the colourscheme has to set that option as
 --- well as the groups. The previous value is saved and put back if another
 --- colourscheme is loaded over the top, so we do not leave the option

@@ -6,14 +6,13 @@ M.defaults = {
   --- Use the normal background colour, or let the terminal show through.
   transparent = false,
 
-  --- Keep the original's flat look, where types, functions and variables all
-  --- share the base foreground colour. Set to false to let types and
-  --- functions pick up a little contrast, which some people find easier to
-  --- scan in large files.
+  --- Keep the flat look, where functions, variables and members share the base
+  --- foreground colour and types sit with the keywords. Set to false to let
+  --- types and functions pick up a little contrast, which some people find
+  --- easier to scan in large files.
   flat = true,
 
-  --- The original scheme used no italics or bold anywhere. These are off by
-  --- default for that reason.
+  --- No italics or bold anywhere by default.
   styles = {
     comments = { italic = false },
     keywords = { bold = false },
@@ -33,8 +32,7 @@ M.defaults = {
   --- colourscheme is loaded. Set false to keep full control of the option.
   mode_cursor = true,
 
-  --- Highlight TODO / NOTE / IMPORTANT / STUDY style keywords in comments,
-  --- the way the original config did.
+  --- Highlight TODO / NOTE / IMPORTANT / STUDY style keywords in comments.
   comment_keywords = true,
 
   --- Extend or replace palette colours. Either a table merged over the

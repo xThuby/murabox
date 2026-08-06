@@ -2,13 +2,12 @@
 
 [![test](https://github.com/xThuby/murabox/actions/workflows/test.yml/badge.svg)](https://github.com/xThuby/murabox/actions/workflows/test.yml)
 
-A Neovim colourscheme after Casey Muratori's editor during the Handmade Hero era.
+A Neovim colourscheme based on Handmade Hero.
 
 Warm tan on near-black, goldenrod keywords and types, olive drab literals, and
-not much else. The point of the original was that it was *flat*: functions,
-variables, members and plain text all share one colour, so nothing competes for
-your attention and the structure of the code has to carry itself. murabox keeps
-that default rather than repainting it as a modern rainbow theme.
+not much else. It is deliberately flat: functions, variables, members and plain
+text all share one colour, so nothing competes for your attention and the
+structure of the code has to carry itself.
 
 ```
 #161616   background
@@ -21,8 +20,8 @@ that default rather than repainting it as a modern rainbow theme.
 ```
 
 burlywood3 is the reference tan, but it is glaring as the colour most of the
-screen is painted with, so body text sits a step below it and burlywood3 is
-kept for emphasis. To go back to it:
+screen is painted with, so body text sits a step below it and burlywood3 is kept
+for emphasis. To use it for body text:
 
 ```lua
 require("murabox").setup({ palette = { fg = "#CDAA7D" } })
@@ -86,7 +85,7 @@ require("murabox").setup({
   -- functions and types out with some contrast of their own.
   flat = true,
 
-  -- The original used no italics or bold anywhere.
+  -- No italics or bold anywhere by default.
   styles = {
     comments  = { italic = false },
     keywords  = { bold = false },
@@ -104,8 +103,8 @@ require("murabox").setup({
   -- Colour the cursor by mode: green normal, red insert, blue visual.
   mode_cursor = true,
 
-  -- Highlight TODO / NOTE / IMPORTANT / STUDY with a solid block, as the
-  -- original did. See the note below.
+  -- Highlight TODO / NOTE / IMPORTANT / STUDY with a solid block. See the
+  -- note below.
   comment_keywords = true,
 
   -- Change palette colours. Table (merged) or function (mutates in place).
@@ -187,12 +186,11 @@ and in the GUI clients; a few will show the shape change but not the colour.
 
 ## On accuracy
 
-The core colours are taken from the Emacs configuration Casey used during
-Handmade Hero, cross-checked against screen captures from the series.
-Everything else — float windows, diagnostics, git signs, plugin groups — has no
-counterpart in that setup and was derived to fit. So treat this as a
-colourscheme *in that spirit*, not a byte-exact port. Corrections welcome via
-an issue.
+The core colours come from Casey Muratori's Emacs configuration, cross-checked
+against screen captures from the series. Everything else — float windows,
+diagnostics, git signs, plugin groups — has no counterpart there and was derived
+to fit, and a few choices depart from the source where it made for a better
+editor. This is not a byte-exact port. Corrections welcome via an issue.
 
 ## Development
 

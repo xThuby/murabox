@@ -8,9 +8,9 @@ local M = {}
 function M.build(config, c)
   local styles = config.styles or {}
 
-  -- In the original, types carry the same goldenrod as keywords, while
-  -- functions, variables and members are all the same flat tan. `flat = false`
-  -- pulls functions and types apart a little, without leaving the palette.
+  -- Types carry the same goldenrod as keywords; functions, variables and
+  -- members are all the same flat tan. `flat = false` pulls functions and
+  -- types apart a little, without leaving the palette.
   local fn_fg = config.flat and c.fg or c.fg_bright
   local type_fg = config.flat and c.keyword or c.orange
 
@@ -116,8 +116,8 @@ function M.build(config, c)
     String = { fg = c.string },
     Character = { fg = c.string },
     Boolean = { fg = c.string },
-    -- Numeric literals share the string colour, as in the original: everything
-    -- that is a literal value reads as one category.
+    -- Numeric literals share the string colour: everything that is a literal
+    -- value reads as one category.
     Number = { fg = c.string },
     Float = { fg = c.string },
 
@@ -508,7 +508,7 @@ function M.build(config, c)
     FzfLuaFzfMatch = { fg = c.green_bright },
   }
 
-  -- TODO / NOTE / IMPORTANT style keywords, as in the original config.
+  -- TODO / NOTE / IMPORTANT style keywords.
   if config.comment_keywords then
     hl.MuraboxTodo = { fg = c.bg, bg = c.keyword, bold = true }
     hl.MuraboxNote = { fg = c.bg, bg = c.green, bold = true }

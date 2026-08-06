@@ -1,11 +1,11 @@
 --- Murabox palette.
 ---
---- The core colours are taken from Casey Muratori's Emacs configuration as
---- used during the Handmade Hero series. The defining trait of that scheme is
---- how *flat* it is: types, functions, variables and plain text all share the
---- same burlywood tan, and only keywords (goldenrod) and strings (olive drab)
---- break away from it. Everything else here is derived to fill in the parts of
---- a modern editor that Emacs of that vintage simply did not have.
+--- The core colours come from Casey Muratori's Emacs configuration, used
+--- during Handmade Hero. The scheme is deliberately flat: functions,
+--- variables, members and plain text all share one tan, types sit with the
+--- keywords on goldenrod, and literals are olive drab. That is the whole
+--- vocabulary. Everything below the core block is derived to cover the parts
+--- of a modern editor that setup had no equivalent for.
 
 local M = {}
 
@@ -22,17 +22,17 @@ M.colors = {
   keyword = "#CD950C", -- DarkGoldenrod3
   string = "#6B8E23", -- olive drab
 
-  -- Mode-dependent cursor colours. Green is the original; red and blue are
-  -- built the same way (one channel at FF, the others at 40) so the three
-  -- read as a set. Blue is lifted a little for legibility on a dark bg.
+  -- Mode-dependent cursor colours. Red and blue are built the same way as the
+  -- green above (one channel at FF, the others at 40) so the three read as a
+  -- set. Blue is lifted a little for legibility on a dark background.
   cursor_insert = "#FF4040",
   cursor_visual = "#4080FF",
   cursor_replace = "#FF4040",
   cursor_command = "#CD950C",
 
   -- Derived background steps, for float windows, sidebars, cursorline and
-  -- the statusline. Kept deliberately close to bg: the original had almost
-  -- no chrome, and heavy panel contrast fights the flat look.
+  -- the statusline. Kept deliberately close to bg, since heavy panel contrast
+  -- fights the flat look.
   bg_dark = "#101010",
   bg_float = "#131313",
   bg_highlight = "#1E1E1E",

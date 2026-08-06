@@ -1,8 +1,8 @@
 --- Comment keyword highlighting.
 ---
---- The original config made TODO / NOTE / IMPORTANT / STUDY jump off the
---- screen with a solid background block, so a note left in a file could not be
---- missed while scrolling. Treesitter-highlighted buffers ignore old-style
+--- TODO / NOTE / IMPORTANT / STUDY get a solid background block so a note left
+--- in a file cannot be missed while scrolling past it.
+--- Treesitter-highlighted buffers ignore old-style
 --- `syntax match` rules, so this uses window-local matches instead, which work
 --- regardless of which highlighting engine a buffer uses.
 
