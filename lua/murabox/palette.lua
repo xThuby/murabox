@@ -52,7 +52,9 @@ M.colors = {
 
   -- Accents. Muted so they sit inside the warm palette instead of on top
   -- of it. Used for diagnostics, git state and the TODO/NOTE keywords.
-  red = "#CC5555",
+  -- Full red, the same value as the insert cursor. Every red in the scheme
+  -- comes from here, so errors, deletions and escape sequences all agree.
+  red = "#FF4040",
   orange = "#C97A40",
   yellow = "#CD950C", -- same goldenrod as keywords, by design
   green = "#6B8E23", -- same olive drab as strings, by design

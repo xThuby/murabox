@@ -147,7 +147,9 @@ function M.build(config, c)
     Typedef = style({ fg = type_fg }, styles.types),
 
     Special = { fg = c.fg_dim },
-    SpecialChar = { fg = c.orange },
+    -- Escape sequences take the full red, so `\n` inside a string is
+    -- unmistakably not part of the text.
+    SpecialChar = { fg = c.red },
     Tag = { fg = c.keyword },
     Delimiter = { fg = c.fg_dim },
     SpecialComment = { fg = c.grey_light },
@@ -250,14 +252,14 @@ function M.build(config, c)
     ["@string"] = { fg = c.string },
     ["@string.documentation"] = { fg = c.string },
     ["@string.regexp"] = { fg = c.orange },
-    ["@string.escape"] = { fg = c.orange },
-    ["@string.special"] = { fg = c.orange },
+    ["@string.escape"] = { fg = c.red },
+    ["@string.special"] = { fg = c.red },
     ["@string.special.symbol"] = { fg = c.fg },
     ["@string.special.url"] = { fg = c.cyan, underline = true },
     ["@string.special.path"] = { fg = c.string },
 
     ["@character"] = { fg = c.string },
-    ["@character.special"] = { fg = c.orange },
+    ["@character.special"] = { fg = c.red },
     ["@boolean"] = { fg = c.string },
     ["@number"] = { fg = c.string },
     ["@number.float"] = { fg = c.string },

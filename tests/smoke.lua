@@ -86,7 +86,16 @@ check(
   vim.o.guicursor:match("i%-ci:block%-MuraboxCursorInsert") ~= nil,
   vim.o.guicursor
 )
-check("DiagnosticError set", hl("DiagnosticError").fg ~= nil, "missing")
+-- Every red in the scheme is the full red, matching the insert cursor.
+check("DiagnosticError is full red", hl("DiagnosticError").fg == 0xFF4040, hex(hl("DiagnosticError").fg))
+check("SpecialChar is full red", hl("SpecialChar").fg == 0xFF4040, hex(hl("SpecialChar").fg))
+check("@string.escape is full red", hl("@string.escape").fg == 0xFF4040, hex(hl("@string.escape").fg))
+check("GitSignsDelete is full red", hl("GitSignsDelete").fg == 0xFF4040, hex(hl("GitSignsDelete").fg))
+check(
+  "escape red matches insert cursor",
+  hl("@string.escape").fg == hl("MuraboxCursorInsert").bg,
+  hex(hl("@string.escape").fg)
+)
 check("TelescopeSelection set", hl("TelescopeSelection").bg ~= nil, "missing")
 check("terminal_color_3 set", vim.g.terminal_color_3 == "#CD950C", tostring(vim.g.terminal_color_3))
 check("MuraboxTodo defined", hl("MuraboxTodo").bg == 0xCD950C, hex(hl("MuraboxTodo").bg))
