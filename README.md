@@ -12,14 +12,24 @@ that default rather than repainting it as a modern rainbow theme.
 
 ```
 #161616   background
-#CDAA7D   foreground         burlywood3   -- functions, variables, members
+#A08563   foreground         functions, variables, members
+#CDAA7D   emphasis           burlywood3
 #CD950C   keywords, types    DarkGoldenrod3
 #6B8E23   strings, numbers   olive drab
 #7F7F7F   comments           gray50
 #40FF40   cursor (normal mode)
 ```
 
-The cursor is green in normal mode, red in insert and blue in visual.
+burlywood3 is the reference tan, but it is glaring as the colour most of the
+screen is painted with, so body text sits a step below it and burlywood3 is
+kept for emphasis. To go back to it:
+
+```lua
+require("murabox").setup({ palette = { fg = "#CDAA7D" } })
+```
+
+The cursor is a block in every mode, green in normal, red in insert and blue in
+visual.
 
 Written in Lua, with support for Treesitter, LSP semantic tokens, diagnostics
 and the usual plugin ecosystem (Telescope, gitsigns, nvim-cmp, blink.cmp,

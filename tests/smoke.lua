@@ -36,8 +36,9 @@ local ok, err = pcall(vim.cmd.colorscheme, "murabox")
 check("colorscheme murabox loads", ok, tostring(err))
 check("g:colors_name set", vim.g.colors_name == "murabox", tostring(vim.g.colors_name))
 
--- The six core colours are the point of the scheme; pin them.
-check("Normal fg is burlywood3", hl("Normal").fg == 0xCDAA7D, hex(hl("Normal").fg))
+-- The core colours are the point of the scheme; pin them.
+check("Normal fg is knocked-back tan", hl("Normal").fg == 0xA08563, hex(hl("Normal").fg))
+check("burlywood3 kept as fg_bright", hl("Title").fg == 0xCDAA7D, hex(hl("Title").fg))
 check("Normal bg is #161616", hl("Normal").bg == 0x161616, hex(hl("Normal").bg))
 check("Keyword is DarkGoldenrod3", hl("Keyword").fg == 0xCD950C, hex(hl("Keyword").fg))
 check("String is olive drab", hl("String").fg == 0x6B8E23, hex(hl("String").fg))
@@ -46,7 +47,7 @@ check("Cursor bg is #40FF40", hl("Cursor").bg == 0x40FF40, hex(hl("Cursor").bg))
 
 check("Comment not italic by default", hl("Comment").italic ~= true, "italic set")
 check("@keyword.return themed", hl("@keyword.return").fg == 0xCD950C, hex(hl("@keyword.return").fg))
-check("@variable is flat fg", hl("@variable").fg == 0xCDAA7D, hex(hl("@variable").fg))
+check("@variable is flat fg", hl("@variable").fg == 0xA08563, hex(hl("@variable").fg))
 
 -- Types share the keyword goldenrod, and numeric literals share the string
 -- colour. Both are visible in the reference screenshots.
@@ -55,7 +56,7 @@ check("@type is goldenrod", hl("@type").fg == 0xCD950C, hex(hl("@type").fg))
 check("Number matches String", hl("Number").fg == hl("String").fg, hex(hl("Number").fg))
 check("@number matches @string", hl("@number").fg == hl("@string").fg, hex(hl("@number").fg))
 check("String is olive drab", hl("String").fg == 0x6B8E23, hex(hl("String").fg))
-check("Function is flat fg", hl("Function").fg == 0xCDAA7D, hex(hl("Function").fg))
+check("Function is flat fg", hl("Function").fg == 0xA08563, hex(hl("Function").fg))
 
 -- Mode-dependent cursor.
 check("cursor normal is green", hl("MuraboxCursorNormal").bg == 0x40FF40, hex(hl("MuraboxCursorNormal").bg))
@@ -64,6 +65,11 @@ check("cursor visual is blue", hl("MuraboxCursorVisual").bg == 0x4080FF, hex(hl(
 check("guicursor names normal group", vim.o.guicursor:match("MuraboxCursorNormal") ~= nil, vim.o.guicursor)
 check("guicursor names insert group", vim.o.guicursor:match("MuraboxCursorInsert") ~= nil, vim.o.guicursor)
 check("guicursor names visual group", vim.o.guicursor:match("MuraboxCursorVisual") ~= nil, vim.o.guicursor)
+check(
+  "insert cursor is a block",
+  vim.o.guicursor:match("i%-ci:block%-MuraboxCursorInsert") ~= nil,
+  vim.o.guicursor
+)
 check("DiagnosticError set", hl("DiagnosticError").fg ~= nil, "missing")
 check("TelescopeSelection set", hl("TelescopeSelection").bg ~= nil, "missing")
 check("terminal_color_3 set", vim.g.terminal_color_3 == "#CD950C", tostring(vim.g.terminal_color_3))
@@ -86,7 +92,7 @@ check("all highlight specs are tables", #bad == 0, table.concat(bad, ", "))
 require("murabox").setup({ flat = false })
 vim.cmd.colorscheme("murabox")
 check("flat=false separates @type from keywords", hl("@type").fg == 0xC97A40, hex(hl("@type").fg))
-check("flat=false gives Function contrast", hl("Function").fg == 0xE6C79C, hex(hl("Function").fg))
+check("flat=false gives Function contrast", hl("Function").fg == 0xCDAA7D, hex(hl("Function").fg))
 
 -- mode_cursor=false must leave 'guicursor' alone.
 local before = "n-v-c:block,i-ci-ve:ver25,r-cr-o:hor20"

@@ -12,7 +12,11 @@ local M = {}
 M.colors = {
   -- Core, straight from the Handmade Hero era config.
   bg = "#161616", -- (set-background-color "#161616")
-  fg = "#CDAA7D", -- burlywood3
+  -- burlywood3 (#CDAA7D) is the reference tan, but at full strength it is
+  -- glaring as the colour most of the screen is painted with. Body text sits
+  -- one step below it; burlywood3 itself is kept as `fg_bright` for emphasis.
+  -- Set `palette = { fg = "#CDAA7D" }` to go back to it.
+  fg = "#A08563",
   cursor = "#40FF40", -- (set-cursor-color "#40FF40")
   comment = "#7F7F7F", -- gray50
   keyword = "#CD950C", -- DarkGoldenrod3
@@ -37,9 +41,9 @@ M.colors = {
   bg_search_cur = "#7A5E12",
 
   -- Derived foreground steps.
-  fg_dim = "#A08563", -- burlywood, knocked back
+  fg_bright = "#CDAA7D", -- burlywood3, for the thing that must stand out
+  fg_dim = "#8A7154", -- for punctuation and other quiet structure
   fg_dark = "#6E5C46", -- for non-current line numbers, inactive text
-  fg_bright = "#E6C79C", -- for the rare thing that must stand out
 
   -- Greys for borders, folds and other structural chrome.
   grey = "#4D4D4D",

@@ -15,7 +15,9 @@ local group = vim.api.nvim_create_augroup("MuraboxCursor", { clear = true })
 local spec = table.concat({
   "n-sm:block-MuraboxCursorNormal",
   "v-ve:block-MuraboxCursorVisual",
-  "i-ci:ver25-MuraboxCursorInsert",
+  -- Block in insert mode too: the mode reads from the colour, so there is no
+  -- need to change shape as well.
+  "i-ci:block-MuraboxCursorInsert",
   "r-cr:hor20-MuraboxCursorReplace",
   "c:block-MuraboxCursorCommand",
   "o:hor50-MuraboxCursorNormal",
