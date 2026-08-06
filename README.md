@@ -69,7 +69,7 @@ If you want to pass options, call `setup` before the `colorscheme` command:
 ```
 
 Requires Neovim 0.10+ and a true-colour terminal (`termguicolors` is set for
-you). CI runs against stable and nightly.
+you). CI runs against stable.
 
 ## Configuration
 

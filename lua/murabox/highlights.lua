@@ -208,6 +208,11 @@ function M.build(config, c)
     ["@lsp.type.function"] = { link = "Function" },
     ["@lsp.type.interface"] = { link = "Type" },
     ["@lsp.type.macro"] = { link = "Macro" },
+    -- Roslyn emits these for C# preprocessor directives. Semantic tokens
+    -- outrank Treesitter, so without them `#if` / `#endif` lose the goldenrod
+    -- that PreProc and @keyword.directive would otherwise give them.
+    ["@lsp.type.preprocessorKeyword"] = { link = "PreProc" },
+    ["@lsp.type.preprocessorText"] = { fg = c.fg },
     ["@lsp.type.method"] = { link = "Function" },
     ["@lsp.type.namespace"] = { link = "Identifier" },
     ["@lsp.type.parameter"] = { link = "Identifier" },
@@ -286,6 +291,11 @@ function M.build(config, c)
     ["@keyword.conditional.ternary"] = { fg = c.fg },
     ["@keyword.directive"] = { fg = c.keyword },
     ["@keyword.directive.define"] = { fg = c.keyword },
+    -- Older queries (and several parsers) still capture directives as
+    -- @preproc rather than @keyword.directive.
+    ["@preproc"] = { fg = c.keyword },
+    ["@define"] = { fg = c.keyword },
+    ["@include"] = { fg = c.keyword },
 
     ["@punctuation.delimiter"] = { fg = c.fg_dim },
     ["@punctuation.bracket"] = { fg = c.fg_dim },
