@@ -6,10 +6,19 @@ on:
   pull_request:
   workflow_dispatch:
 
+# Only the newest commit on a branch is worth testing. Without this, a run of
+# pushes queues up jobs faster than runners are handed out, and the ones at the
+# back get cancelled without ever starting.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   smoke:
     name: smoke (${{ matrix.neovim }})
     runs-on: ubuntu-latest
+    # The suite takes well under a minute; anything near this is a hang.
+    timeout-minutes: 10
     # Nightly breaking is Neovim's business, not a reason to fail the build.
     continue-on-error: ${{ matrix.neovim == 'nightly' }}
     strategy:
