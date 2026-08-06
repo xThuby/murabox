@@ -1,5 +1,7 @@
 # murabox
 
+[![test](https://github.com/xThuby/murabox/actions/workflows/test.yml/badge.svg)](https://github.com/xThuby/murabox/actions/workflows/test.yml)
+
 A Neovim colourscheme after Casey Muratori's editor during the Handmade Hero era.
 
 Warm tan on near-black, goldenrod keywords and types, olive drab literals, and
@@ -57,8 +59,8 @@ If you want to pass options, call `setup` before the `colorscheme` command:
 }
 ```
 
-Requires Neovim 0.9+ and a true-colour terminal (`termguicolors` is set for
-you).
+Requires Neovim 0.10+ and a true-colour terminal (`termguicolors` is set for
+you). CI runs against stable and nightly.
 
 ## Configuration
 
@@ -181,6 +183,20 @@ Everything else — float windows, diagnostics, git signs, plugin groups — has
 counterpart in that setup and was derived to fit. So treat this as a
 colourscheme *in that spirit*, not a byte-exact port. Corrections welcome via
 an issue.
+
+## Development
+
+The smoke test covers the core palette, every option, and the cleanup paths for
+`'guicursor'` and the keyword matches. Run it from the repo root:
+
+```bash
+nvim --headless --clean -u NONE -l tests/smoke.lua
+```
+
+It exits non-zero on failure and runs in CI against stable and nightly Neovim.
+If you change a core colour, update the assertions in `tests/smoke.lua` in the
+same commit — they exist to make a palette change deliberate rather than
+accidental.
 
 ## Licence
 

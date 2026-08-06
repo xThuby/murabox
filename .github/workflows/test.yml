@@ -1,0 +1,34 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    name: smoke (${{ matrix.neovim }})
+    runs-on: ubuntu-latest
+    # Nightly breaking is Neovim's business, not a reason to fail the build.
+    continue-on-error: ${{ matrix.neovim == 'nightly' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        neovim: [stable, nightly]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Neovim (${{ matrix.neovim }})
+        run: |
+          curl -fsSL -o nvim.tar.gz \
+            "https://github.com/neovim/neovim/releases/download/${{ matrix.neovim }}/nvim-linux-x86_64.tar.gz"
+          tar -xzf nvim.tar.gz
+          echo "$PWD/nvim-linux-x86_64/bin" >> "$GITHUB_PATH"
+
+      - name: Version
+        run: nvim --version
+
+      - name: Smoke test
+        run: nvim --headless --clean -u NONE -l tests/smoke.lua
