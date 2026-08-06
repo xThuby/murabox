@@ -1,0 +1,17 @@
+# Editor / OS cruft
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Lua / luarocks
+*.rock
+.luarc.json
+luac.out
+
+# Local scratch
+scratch/
+
+# Local tool state
+.claude/settings.local.json
