@@ -35,6 +35,13 @@ M.defaults = {
   --- Colour TODO / NOTE / IMPORTANT / STUDY style keywords in comments.
   comment_keywords = true,
 
+  --- How preprocessor directives are coloured.
+  ---   "bright" — a step above body text, in the warm foreground tan.
+  ---   "orange" — orange red, pulling directives out of the palette so a
+  ---              block of conditional compilation is obvious at a glance.
+  --- @type "bright"|"orange"
+  preproc = "bright",
+
   --- Extend or replace palette colours. Either a table merged over the
   --- palette, or a function receiving the palette table to mutate in place.
   palette = {},

@@ -14,6 +14,10 @@ function M.build(config, c)
   local fn_fg = config.flat and c.fg or c.fg_bright
   local type_fg = config.flat and c.keyword or c.orange
 
+  -- Directives sit a step above body text by default. `preproc = "orange"`
+  -- takes them out of the warm range entirely.
+  local preproc_fg = config.preproc == "orange" and c.orange_red or c.fg_bright
+
   local function style(base, extra)
     return vim.tbl_extend("force", base, extra or {})
   end
@@ -134,11 +138,11 @@ function M.build(config, c)
 
     -- Directives sit a step brighter than body text, and well clear of the
     -- keyword goldenrod: `#define` and `#if` mark structure around the code
-    -- rather than being part of it.
-    PreProc = { fg = c.fg_bright },
-    Include = { fg = c.fg_bright },
-    Define = { fg = c.fg_bright },
-    PreCondit = { fg = c.fg_bright },
+    -- rather than being part of it. See the `preproc` option.
+    PreProc = { fg = preproc_fg },
+    Include = { fg = preproc_fg },
+    Define = { fg = preproc_fg },
+    PreCondit = { fg = preproc_fg },
     Macro = { fg = c.keyword },
 
     Type = style({ fg = type_fg }, styles.types),
@@ -294,13 +298,13 @@ function M.build(config, c)
     ["@keyword.exception"] = style({ fg = c.keyword }, styles.keywords),
     ["@keyword.conditional"] = style({ fg = c.keyword }, styles.keywords),
     ["@keyword.conditional.ternary"] = { fg = c.fg },
-    ["@keyword.directive"] = { fg = c.fg_bright },
-    ["@keyword.directive.define"] = { fg = c.fg_bright },
+    ["@keyword.directive"] = { fg = preproc_fg },
+    ["@keyword.directive.define"] = { fg = preproc_fg },
     -- Older queries (and several parsers) still capture directives as
     -- @preproc rather than @keyword.directive.
-    ["@preproc"] = { fg = c.fg_bright },
-    ["@define"] = { fg = c.fg_bright },
-    ["@include"] = { fg = c.fg_bright },
+    ["@preproc"] = { fg = preproc_fg },
+    ["@define"] = { fg = preproc_fg },
+    ["@include"] = { fg = preproc_fg },
 
     ["@punctuation.delimiter"] = { fg = c.fg_dim },
     ["@punctuation.bracket"] = { fg = c.fg_dim },

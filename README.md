@@ -106,6 +106,11 @@ require("murabox").setup({
   -- Colour TODO / NOTE / IMPORTANT / STUDY in comments. See the note below.
   comment_keywords = true,
 
+  -- How preprocessor directives are coloured. "bright" keeps them a step
+  -- above body text; "orange" gives them orange red (#E95410), so a block
+  -- of conditional compilation is obvious at a glance.
+  preproc = "bright",
+
   -- Change palette colours. Table (merged) or function (mutates in place).
   palette = {},
 
@@ -121,6 +126,12 @@ Give types and functions a bit of contrast:
 
 ```lua
 require("murabox").setup({ flat = false })
+```
+
+Pull `#if` / `#define` / `#endif` out in orange red:
+
+```lua
+require("murabox").setup({ preproc = "orange" })
 ```
 
 Change the mode cursor colours:

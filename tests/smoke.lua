@@ -124,6 +124,26 @@ vim.cmd.colorscheme("murabox")
 check("flat=false separates @type from keywords", hl("@type").fg == 0xC97A40, hex(hl("@type").fg))
 check("flat=false gives Function contrast", hl("Function").fg == 0xCDAA7D, hex(hl("Function").fg))
 
+require("murabox").setup({ preproc = "orange" })
+vim.cmd.colorscheme("murabox")
+check("preproc=orange sets PreProc", hl("PreProc").fg == 0xE95410, hex(hl("PreProc").fg))
+check("preproc=orange sets @preproc", hl("@preproc").fg == 0xE95410, hex(hl("@preproc").fg))
+check(
+  "preproc=orange sets @keyword.directive",
+  hl("@keyword.directive").fg == 0xE95410,
+  hex(hl("@keyword.directive").fg)
+)
+check("preproc=orange leaves Normal alone", hl("Normal").fg == 0xA08563, hex(hl("Normal").fg))
+
+-- An unknown value falls back to the default rather than erroring.
+require("murabox").setup({ preproc = "nonsense" })
+vim.cmd.colorscheme("murabox")
+check("unknown preproc falls back to bright", hl("PreProc").fg == 0xCDAA7D, hex(hl("PreProc").fg))
+
+require("murabox").setup({ preproc = "bright" })
+vim.cmd.colorscheme("murabox")
+check("preproc=bright is the default look", hl("PreProc").fg == 0xCDAA7D, hex(hl("PreProc").fg))
+
 -- mode_cursor=false must leave 'guicursor' alone.
 local before = "n-v-c:block,i-ci-ve:ver25,r-cr-o:hor20"
 vim.o.guicursor = before

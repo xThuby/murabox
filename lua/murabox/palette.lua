@@ -56,6 +56,7 @@ M.colors = {
   -- comes from here, so errors, deletions and escape sequences all agree.
   red = "#FF4040",
   orange = "#C97A40",
+  orange_red = "#E95410", -- optional preprocessor colour, see `preproc`
   yellow = "#CD950C", -- same goldenrod as keywords, by design
   green = "#6B8E23", -- same olive drab as strings, by design
   green_bright = "#40FF40", -- cursor green; used sparingly
