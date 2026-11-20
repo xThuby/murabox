@@ -235,7 +235,15 @@ local decorative = {
   NeoTreeVertSplit = true,
   NeoTreeWinSeparator = true,
   NvimTreeEndOfBuffer = true,
-  NonText = true,
+  SnacksIndent = true,
+  SnacksIndentBlank = true,
+  SnacksIndentChunk = true,
+  SnacksIndentScope = true,
+  SnacksInputBorder = true,
+  SnacksPickerBorder = true,
+  SnacksPickerInputBorder = true,
+  SnacksPickerListBorder = true,
+  SnacksPickerPreviewBorder = true,
   NotifyDEBUGBorder = true,
   NvimTreeIndentMarker = true,
   NvimTreeWinSeparator = true,
@@ -314,6 +322,22 @@ for name, spec in pairs(built) do
 end
 table.sort(dim)
 check("no text group is below 3:1 on any background", #dim == 0, table.concat(dim, ", "))
+
+-- Plugins link their own "dim text" groups to NonText, so it carries real
+-- text and cannot be treated as decoration.
+check(
+  "NonText is legible",
+  contrast(rgb(built.NonText.fg), rgb(palette.bg)) >= MIN_CONTRAST,
+  ("%.2f"):format(contrast(rgb(built.NonText.fg), rgb(palette.bg)))
+)
+
+-- Snacks links untracked and ignored paths to NonText by default; an entry in
+-- the explorer must not read as dimmer than the files around it.
+check(
+  "snacks untracked files match normal files",
+  built.SnacksPickerGitStatusUntracked.fg == built.SnacksPickerFile.fg,
+  ("untracked=%s file=%s"):format(built.SnacksPickerGitStatusUntracked.fg, built.SnacksPickerFile.fg)
+)
 
 -- A file name must not read as dimmer than the files around it just because
 -- git has not seen it yet.

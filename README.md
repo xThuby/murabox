@@ -32,8 +32,8 @@ visual.
 
 Written in Lua, with support for Treesitter, LSP semantic tokens, diagnostics
 and the usual plugin ecosystem (Telescope, gitsigns, nvim-cmp, blink.cmp,
-neo-tree, nvim-tree, which-key, indent-blankline, mini.nvim, lazy.nvim,
-flash/leap/hop, todo-comments, fzf-lua). A lualine theme is included.
+neo-tree, nvim-tree, snacks.nvim, which-key, indent-blankline, mini.nvim,
+lazy.nvim, flash/leap/hop, todo-comments, fzf-lua). A lualine theme is included.
 
 ## Install
 
