@@ -212,7 +212,11 @@ The smoke test covers the core palette, every option, and the cleanup paths for
 nvim --headless --clean -u NONE -l tests/smoke.lua
 ```
 
-It exits non-zero on failure and runs in CI against stable and nightly Neovim.
+It also checks that no text group falls below a 3:1 contrast ratio against
+its background, so nothing ends up dark on dark. Separators, borders and
+indent guides are exempt by name, since they draw lines rather than letters.
+
+It exits non-zero on failure and runs in CI against stable Neovim.
 If you change a core colour, update the assertions in `tests/smoke.lua` in the
 same commit — they exist to make a palette change deliberate rather than
 accidental.
