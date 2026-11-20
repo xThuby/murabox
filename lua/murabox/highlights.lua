@@ -443,7 +443,7 @@ function M.build(config, c)
     NeoTreeGitAdded = { fg = c.green },
     NeoTreeGitModified = { fg = c.keyword },
     NeoTreeGitDeleted = { fg = c.red },
-    NeoTreeGitUntracked = { fg = c.fg_dim },
+    NeoTreeGitUntracked = { fg = c.fg },
     NeoTreeDimText = { fg = c.fg_dim },
 
     -- which-key

@@ -36,7 +36,7 @@ M.colors = {
   bg_dark = "#101010",
   bg_float = "#131313",
   bg_highlight = "#1E1E1E",
-  bg_visual = "#264458",
+  bg_visual = "#1A2E3E",
   bg_search = "#4A3A10",
   bg_search_cur = "#8A6A15",
 

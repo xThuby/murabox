@@ -274,22 +274,49 @@ local MIN_CONTRAST = 3.0
 local defaults = require("murabox.config").setup({})
 local palette = require("murabox.palette").build(defaults)
 local built = require("murabox.highlights").build(defaults, palette)
-local page_bg = rgb(built.Normal.bg)
-local dim = {}
 
+-- A group without its own background is painted over whichever background the
+-- window happens to have, so it has to hold up on all of them. Checking only
+-- the normal background misses text that washes out on a selected row.
+local backdrops = {
+  { "normal", palette.bg },
+  { "cursorline", palette.bg_highlight },
+  { "selection", palette.bg_visual },
+}
+
+local dim = {}
 for name, spec in pairs(built) do
   if type(spec) == "table" and spec.fg and not decorative[name] then
-    local fg, bg = rgb(spec.fg), spec.bg and rgb(spec.bg) or page_bg
-    if fg and bg then
-      local r = contrast(fg, bg)
-      if r < MIN_CONTRAST then
-        table.insert(dim, ("%s (%.2f)"):format(name, r))
+    local fg = rgb(spec.fg)
+    if fg then
+      if spec.bg then
+        local bg = rgb(spec.bg)
+        local r = bg and contrast(fg, bg)
+        if r and r < MIN_CONTRAST then
+          table.insert(dim, ("%s (%.2f on own bg)"):format(name, r))
+        end
+      else
+        for _, backdrop in ipairs(backdrops) do
+          local bg = rgb(backdrop[2])
+          local r = bg and contrast(fg, bg)
+          if r and r < MIN_CONTRAST then
+            table.insert(dim, ("%s (%.2f on %s)"):format(name, r, backdrop[1]))
+          end
+        end
       end
     end
   end
 end
 table.sort(dim)
-check("no text group is below 3:1 contrast", #dim == 0, table.concat(dim, ", "))
+check("no text group is below 3:1 on any background", #dim == 0, table.concat(dim, ", "))
+
+-- A file name must not read as dimmer than the files around it just because
+-- git has not seen it yet.
+check(
+  "untracked files are as readable as tracked ones",
+  built.NeoTreeGitUntracked.fg == built.NeoTreeFileName.fg,
+  ("untracked=%s filename=%s"):format(built.NeoTreeGitUntracked.fg, built.NeoTreeFileName.fg)
+)
 
 print(("\n%d failure(s)"):format(#failures))
 vim.cmd(#failures == 0 and "qall!" or "cquit")
