@@ -38,12 +38,12 @@ M.colors = {
   bg_highlight = "#1E1E1E",
   bg_visual = "#264458",
   bg_search = "#4A3A10",
-  bg_search_cur = "#7A5E12",
+  bg_search_cur = "#8A6A15",
 
   -- Derived foreground steps.
   fg_bright = "#CDAA7D", -- burlywood3, for the thing that must stand out
   fg_dim = "#8A7154", -- for punctuation and other quiet structure
-  fg_dark = "#6E5C46", -- for non-current line numbers, inactive text
+  fg_dark = "#7D6950", -- dimmest text step, kept legible against bg
 
   -- Greys for borders, folds and other structural chrome.
   grey = "#4D4D4D",

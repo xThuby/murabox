@@ -210,5 +210,86 @@ for _, m in ipairs(vim.fn.getmatches()) do
 end
 check("matches cleared on colorscheme switch", not leftover, "leftover matches")
 
+-- Contrast ---------------------------------------------------------------
+-- No readable text may be dark on a dark background. Decorative chrome
+-- (separators, borders, indent guides, deliberately hidden groups) is exempt
+-- because it draws lines and fills, not letters.
+local decorative = {
+  BlinkCmpDocBorder = true,
+  BlinkCmpMenuBorder = true,
+  EndOfBuffer = true,
+  FloatBorder = true,
+  FzfLuaBorder = true,
+  IblIndent = true,
+  IblScope = true,
+  IblWhitespace = true,
+  Ignore = true,
+  LazyProgressTodo = true,
+  LspCodeLensSeparator = true,
+  MiniIndentscopeSymbol = true,
+  MsgSeparator = true,
+  NeoTreeIndentMarker = true,
+  NeoTreeWinSeparator = true,
+  NonText = true,
+  NotifyDEBUGBorder = true,
+  NvimTreeIndentMarker = true,
+  NvimTreeWinSeparator = true,
+  TelescopeBorder = true,
+  TelescopePromptBorder = true,
+  WhichKeyBorder = true,
+  WinSeparator = true,
+  Whitespace = true,
+}
+
+local function rgb(v)
+  if type(v) == "string" then
+    v = tonumber((v:gsub("#", "")), 16)
+  end
+  if type(v) ~= "number" then
+    return nil
+  end
+  return { math.floor(v / 65536) % 256, math.floor(v / 256) % 256, v % 256 }
+end
+
+local function luminance(col)
+  local function channel(x)
+    x = x / 255
+    if x <= 0.03928 then
+      return x / 12.92
+    end
+    return ((x + 0.055) / 1.055) ^ 2.4
+  end
+  return 0.2126 * channel(col[1]) + 0.7152 * channel(col[2]) + 0.0722 * channel(col[3])
+end
+
+local function contrast(fg, bg)
+  local a, b = luminance(fg), luminance(bg)
+  if a < b then
+    a, b = b, a
+  end
+  return (a + 0.05) / (b + 0.05)
+end
+
+local MIN_CONTRAST = 3.0
+local defaults = require("murabox.config").setup({})
+local palette = require("murabox.palette").build(defaults)
+local built = require("murabox.highlights").build(defaults, palette)
+local page_bg = rgb(built.Normal.bg)
+local dim = {}
+
+for name, spec in pairs(built) do
+  if type(spec) == "table" and spec.fg and not decorative[name] then
+    local fg, bg = rgb(spec.fg), spec.bg and rgb(spec.bg) or page_bg
+    if fg and bg then
+      local r = contrast(fg, bg)
+      if r < MIN_CONTRAST then
+        table.insert(dim, ("%s (%.2f)"):format(name, r))
+      end
+    end
+  end
+end
+table.sort(dim)
+check("no text group is below 3:1 contrast", #dim == 0, table.concat(dim, ", "))
+
 print(("\n%d failure(s)"):format(#failures))
 vim.cmd(#failures == 0 and "qall!" or "cquit")

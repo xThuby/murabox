@@ -46,7 +46,7 @@ function M.build(config, c)
     MuraboxCursorReplace = { fg = c.bg, bg = c.cursor_replace },
     MuraboxCursorCommand = { fg = c.bg, bg = c.cursor_command },
 
-    TermCursorNC = { fg = c.bg, bg = c.grey },
+    TermCursorNC = { fg = c.bg, bg = c.fg_dark },
     CursorLine = { bg = c.bg_highlight },
     CursorColumn = { bg = c.bg_highlight },
     ColorColumn = { bg = c.bg_highlight },
@@ -68,13 +68,13 @@ function M.build(config, c)
     MatchParen = { fg = c.green_bright, bold = true },
 
     StatusLine = { fg = c.fg_dim, bg = c.bg_highlight },
-    StatusLineNC = { fg = c.fg_dark, bg = c.bg_dark },
+    StatusLineNC = { fg = c.fg_dim, bg = c.bg_dark },
     WinBar = { fg = c.fg_dim, bg = c.none },
-    WinBarNC = { fg = c.fg_dark, bg = c.none },
+    WinBarNC = { fg = c.fg_dim, bg = c.none },
     WinSeparator = { fg = c.grey_dark },
     VertSplit = { link = "WinSeparator" },
 
-    TabLine = { fg = c.fg_dark, bg = c.bg_dark },
+    TabLine = { fg = c.fg_dim, bg = c.bg_dark },
     TabLineSel = { fg = c.fg, bg = c.bg_highlight },
     TabLineFill = { bg = c.bg_dark },
 
@@ -83,7 +83,7 @@ function M.build(config, c)
     PmenuKind = { fg = c.keyword, bg = c.bg_float },
     PmenuKindSel = { fg = c.keyword, bg = c.bg_visual },
     PmenuExtra = { fg = c.comment, bg = c.bg_float },
-    PmenuExtraSel = { fg = c.comment, bg = c.bg_visual },
+    PmenuExtraSel = { fg = c.fg_bright, bg = c.bg_visual },
     PmenuSbar = { bg = c.grey_dark },
     PmenuThumb = { bg = c.grey },
     WildMenu = { link = "PmenuSel" },
@@ -99,9 +99,9 @@ function M.build(config, c)
     MsgSeparator = { fg = c.grey_dark },
     NonText = { fg = c.grey_dark },
     Whitespace = { fg = c.grey_dark },
-    SpecialKey = { fg = c.grey },
+    SpecialKey = { fg = c.comment },
     EndOfBuffer = { fg = c.bg },
-    Conceal = { fg = c.grey },
+    Conceal = { fg = c.comment },
     QuickFixLine = { bg = c.bg_highlight },
     debugPC = { bg = c.bg_highlight },
     debugBreakpoint = { fg = c.red },
@@ -206,7 +206,7 @@ function M.build(config, c)
     LspSignatureActiveParameter = { fg = c.fg_bright, bold = true },
     LspCodeLens = { fg = c.comment },
     LspCodeLensSeparator = { fg = c.grey_dark },
-    LspInlayHint = { fg = c.fg_dark, bg = c.bg_highlight },
+    LspInlayHint = { fg = c.fg_dim, bg = c.bg_highlight },
 
     -- Semantic tokens. Kept aligned with the flat look on purpose.
     ["@lsp.type.class"] = { link = "Type" },
@@ -323,7 +323,7 @@ function M.build(config, c)
     ["@markup.heading.3"] = { fg = c.fg, bold = true },
     ["@markup.heading.4"] = { fg = c.fg_dim, bold = true },
     ["@markup.heading.5"] = { fg = c.fg_dim },
-    ["@markup.heading.6"] = { fg = c.fg_dark },
+    ["@markup.heading.6"] = { fg = c.fg_dim },
     ["@markup.quote"] = { fg = c.comment },
     ["@markup.math"] = { fg = c.cyan },
     ["@markup.link"] = { fg = c.cyan },
@@ -333,7 +333,7 @@ function M.build(config, c)
     ["@markup.raw.block"] = { fg = c.string },
     ["@markup.list"] = { fg = c.keyword },
     ["@markup.list.checked"] = { fg = c.green },
-    ["@markup.list.unchecked"] = { fg = c.fg_dark },
+    ["@markup.list.unchecked"] = { fg = c.fg_dim },
 
     ["@diff.plus"] = { fg = c.green },
     ["@diff.minus"] = { fg = c.red },
@@ -370,7 +370,7 @@ function M.build(config, c)
     GitSignsAddInline = { bg = c.diff_add },
     GitSignsChangeInline = { bg = c.diff_text },
     GitSignsDeleteInline = { bg = c.diff_delete },
-    GitSignsCurrentLineBlame = { fg = c.fg_dark },
+    GitSignsCurrentLineBlame = { fg = c.comment },
 
     -- telescope
     TelescopeNormal = { fg = c.fg, bg = c.bg_float },
@@ -422,7 +422,7 @@ function M.build(config, c)
     NvimTreeFolderName = { fg = c.fg },
     NvimTreeFolderIcon = { fg = c.keyword },
     NvimTreeOpenedFolderName = { fg = c.fg_bright },
-    NvimTreeEmptyFolderName = { fg = c.fg_dark },
+    NvimTreeEmptyFolderName = { fg = c.fg_dim },
     NvimTreeSpecialFile = { fg = c.orange },
     NvimTreeGitDirty = { fg = c.keyword },
     NvimTreeGitNew = { fg = c.green },
@@ -443,8 +443,8 @@ function M.build(config, c)
     NeoTreeGitAdded = { fg = c.green },
     NeoTreeGitModified = { fg = c.keyword },
     NeoTreeGitDeleted = { fg = c.red },
-    NeoTreeGitUntracked = { fg = c.fg_dark },
-    NeoTreeDimText = { fg = c.fg_dark },
+    NeoTreeGitUntracked = { fg = c.fg_dim },
+    NeoTreeDimText = { fg = c.fg_dim },
 
     -- which-key
     WhichKey = { fg = c.keyword },
@@ -469,7 +469,7 @@ function M.build(config, c)
     MiniStatuslineModeCommand = { fg = c.bg, bg = c.orange, bold = true },
     MiniStatuslineDevinfo = { fg = c.fg_dim, bg = c.bg_highlight },
     MiniStatuslineFilename = { fg = c.fg, bg = c.bg_highlight },
-    MiniStatuslineInactive = { fg = c.fg_dark, bg = c.bg_dark },
+    MiniStatuslineInactive = { fg = c.fg_dim, bg = c.bg_dark },
 
     -- nvim-notify
     NotifyERRORBorder = { fg = c.red },
@@ -480,12 +480,12 @@ function M.build(config, c)
     NotifyERRORIcon = { fg = c.red },
     NotifyWARNIcon = { fg = c.keyword },
     NotifyINFOIcon = { fg = c.cyan },
-    NotifyDEBUGIcon = { fg = c.grey },
+    NotifyDEBUGIcon = { fg = c.comment },
     NotifyTRACEIcon = { fg = c.magenta },
     NotifyERRORTitle = { fg = c.red },
     NotifyWARNTitle = { fg = c.keyword },
     NotifyINFOTitle = { fg = c.cyan },
-    NotifyDEBUGTitle = { fg = c.grey },
+    NotifyDEBUGTitle = { fg = c.comment },
     NotifyTRACETitle = { fg = c.magenta },
 
     -- lazy.nvim
@@ -510,7 +510,7 @@ function M.build(config, c)
     HopNextKey = { fg = c.green_bright, bold = true },
     HopNextKey1 = { fg = c.keyword, bold = true },
     HopNextKey2 = { fg = c.orange },
-    HopUnmatched = { fg = c.grey },
+    HopUnmatched = { fg = c.comment },
 
     -- render-markdown / headlines
     RenderMarkdownH1Bg = { fg = c.keyword, bg = c.bg_highlight },
